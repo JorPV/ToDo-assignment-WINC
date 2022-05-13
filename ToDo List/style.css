@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin-top: 15vh;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10vh;
+    color: goldenrod;
+    margin-bottom: 5vh;
+}
+
+.todo-input {
+    height: 5vh;
+    width: 50vh;
+    margin-right: 4vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3vh;
+    border: solid 1px;
+    padding-left: 2vh;
+}
+
+.add-button {
+    background-color: blueviolet;
+    color: whitesmoke;
+    height: 5.5vh;
+    width: 12vh;
+    border: none;
+    border-radius: 10px;
+    font-size: 3.5vh;
+}
+
+.list-elements {
+    margin-top: 10vh;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.todo-list {
+    list-style: none;
+    border:solid 1px lightgray;
+}
+
+.todo-item {
+    font-family: 'Montserrat', sans-serif;
+    padding: 5vh;
+    display: inline;
+    height: 15vh;
+}
+
+.trashBin {
+    margin-left: 30vh;
+    background-color: white;
+    color: yellow;
+    border: none;
+}
+
+.checkbox {
+    margin-right: 5vh;
+}
+
+.completed {
+    text-decoration: line-through;
+}
