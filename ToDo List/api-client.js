@@ -27,15 +27,15 @@ const addTasks = async () => {
 };
 
 // DELETE request
-const deleteTask = async (task) => {
-    const getId = task.target.id;
-    console.log(getId); 
-    await fetch(apiUrl + getId, {
-        method: "DELETE",
-    })
-};
+// const deleteTask = async () => {
+//     const getId = task.target.id;
+//     console.log(getId); 
+//     await fetch(apiUrl + getId, {
+//         method: "DELETE",
+//     })
+// };
 
-trashIcon.addEventListener("click", deleteTask);
+// trashIcon.addEventListener("click", deleteTask);
 
 // Add todos to DOM
 // const addTodoItem = async (description) => {
