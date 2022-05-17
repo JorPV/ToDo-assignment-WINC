@@ -24,8 +24,8 @@ const addTodo = (event) => {
   // create trash icon
   const trashIcon = document.createElement("img");
   trashIcon.classList.add("trash-bin");
-  trashIcon.src = "img/red-trash.png";
-  // trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
+  // trashIcon.src = "img/red-trash.png";
+  trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
   todoDiv.appendChild(trashIcon);
   // append to list
   toDoList.appendChild(todoDiv);
