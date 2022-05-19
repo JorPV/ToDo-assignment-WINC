@@ -3,6 +3,7 @@ const todoInput = document.querySelector(".todo-input");
 const addButton = document.querySelector(".add-button");
 const toDoList = document.querySelector(".todo-list");
 
+
 const addTodo = (event) => {
   // todo div
   const todoDiv = document.createElement("div");
@@ -17,15 +18,15 @@ const addTodo = (event) => {
   todoDiv.appendChild(checkCompleted);
   // li value
   const newTodo = document.createElement("li");
-  (newTodo.innerText = todoInput.value), //addTasks();
-    newTodo.classList.add("todo-item");
+  newTodo.innerHTML = todoInput.value, //addTasks();
+  newTodo.classList.add("todo-item");
   // append <li> to the <div>
   todoDiv.appendChild(newTodo);
   // create trash icon
   const trashIcon = document.createElement("img");
   trashIcon.classList.add("trash-bin");
-  // trashIcon.src = "img/red-trash.png";
-  trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
+  trashIcon.src = "img/red-trash.png";
+  // trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
   todoDiv.appendChild(trashIcon);
   // append to list
   toDoList.appendChild(todoDiv);
@@ -56,6 +57,9 @@ const checkTodo = (event) => {
 };
 
 // Event listeners
-addButton.addEventListener("click", addTodo);
+addButton.addEventListener("click",  addTodo);
+todoInput.addEventListener("keypress", (event) => {
+  if (event.keyCode === 13) {addTodo()}
+});
 toDoList.addEventListener("click", deleteTodo);
 toDoList.addEventListener("click", checkTodo);

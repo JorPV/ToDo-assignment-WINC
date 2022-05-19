@@ -12,7 +12,7 @@ const getDataAPI = async () => {
    }; 
 }
 
-getDataAPI().then(output => console.log("Got the data: ", output));
+const getToDos = getDataAPI().then(output => console.log("Got the data: ", output));
 
 // POST request
 // Add task to the API
@@ -28,16 +28,18 @@ const addTasks = async () => {
 
 // DELETE request
 // const deleteTask = async () => {
-//     const getId = task.target.id;
-//     console.log(getId); 
-//     await fetch(apiUrl + getId, {
+//     const getId = await fetch (getToDos,
+//         {body: JSON.stringify({_id})})
+//     };
+//     console.log(getId);
+//     await response (apiUrl + getId, {
 //         method: "DELETE",
 //     })
 // };
 
-// trashIcon.addEventListener("click", deleteTask);
+// toDoList.addEventListener("click", deleteTask);
 
-// Add todos to DOM
+// Add todos to API
 // const addTodoItem = async (description) => {
 //     const allTodos = document.querySelector(".todo-list")
 //     if(allTodos.find((todo) => todo.description === description)) {
