@@ -18,7 +18,7 @@ const addTodo = (event) => {
   todoDiv.appendChild(checkCompleted);
   // li value
   const newTodo = document.createElement("li");
-  newTodo.innerHTML = todoInput.value, //addTasks();
+  newTodo.innerHTML = todoInput.value, addTasks();
   newTodo.classList.add("todo-item");
   // append <li> to the <div>
   todoDiv.appendChild(newTodo);
@@ -33,6 +33,21 @@ const addTodo = (event) => {
   // clear toDo input value every time
   todoInput.value = " ";
 };
+
+// Retrieve data from API to DOM
+  const displayData = async () => {
+      const response = await fetch("http://localhost:3000", {headers: {'Content-Type': 'application/json'}})
+      const data =  await response.json();
+      data.map((todo) => {
+        const li = document.createElement("li");
+        li.innerHTML = todo; 
+        console.log(li);
+        toDoList.appendChild(li)
+        return li; 
+     })
+};
+
+console.log(displayData())
 
 // Delete from DOM
 const deleteTodo = (e) => {
