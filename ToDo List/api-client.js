@@ -1,30 +1,79 @@
-const apiUrl = 'http://localhost:3000/'
+const apiUrl = "http://localhost:3000/";
 const toDosData = [];
 
 // GET reguest
 const getDataAPI = async () => {
-    try {
-    const response = await fetch(apiUrl, {headers: {'Content-Type': 'application/json'}})
-    const data =  await response.json();
-    console.log('Resolved: ', response);
-       return data;
-   } catch (error) {
-       console.log('Rejected', error);
-   }; 
-}
+  try {
+    const response = await fetch(apiUrl, {
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await response.json();
+    console.log("Resolved: ", response);
+    return data;
+  } catch (error) {
+    console.log("Rejected", error);
+  }
+};
 
-const getToDos = getDataAPI().then(output => console.log("I have the data: ", output));
+const getToDos = getDataAPI().then((output) =>
+  console.log("I have the data: ", output)
+);
+
+// DELETE request
+const deleteTask = () => {
+    fetch(apiUrl, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((todos) =>
+        todos.forEach((todo) => {
+          const todoID = todo._id;
+          console.log("ID :" + todoID);
+          const urlWithID = apiUrl + todoID;
+          console.log(urlWithID);
+          return urlWithID;
+        })
+      )
+      .catch((error) => {
+        console.log("Error: " + error);
+      });
+  };
+  
+//   deleteTask();
+
+// GET ID'S
+// Get the ID with the .then() method
+const getTodosId = () => {
+  fetch(apiUrl, {
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((response) => response.json())
+    .then((todos) =>
+      todos.forEach((todo) => {
+        const todoID = todo._id;
+        toDosData.push(todoID);
+        console.log("ID :" + todoID);
+        return todoID;
+      })
+    )
+    .catch((error) => {
+      console.log("Error: " + error);
+    });
+    deleteTask()
+};
+
+getTodosId();
 
 // POST request
 // Add task to the API
 const addTasks = async () => {
-    fetch(apiUrl, {
+  fetch(apiUrl, {
     method: "POST",
-    body: JSON.stringify({description: todoInput.innerHTML, done: false}),
+    body: JSON.stringify({ description: todoInput.innerHTML, done: false }),
     headers: {
-        'Content-Type': 'application/json' 
-    }
-})
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 // DELETE request
@@ -41,19 +90,10 @@ const addTasks = async () => {
 // };
 // console.log(getToDos)
 
-// const deleteTask = async () => {
-//     const getId = await fetch (getToDos,
-//         {body: JSON.stringify({_id})})
-//     };
-//     console.log(getId);
-//     await response (apiUrl + getId, {
-//         method: "DELETE",
-//     })
-// };
 
 // toDoList.addEventListener("click", deleteTask);
 
-// Add todos to API
+// Check if Todo is already in API
 // const addTodoItem = async (description) => {
 //     const allTodos = document.querySelector(".todo-list")
 //     if(allTodos.find((todo) => todo.description === description)) {
