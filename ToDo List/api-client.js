@@ -1,5 +1,4 @@
 const apiUrl = 'http://localhost:3000/'
-
 const toDosData = [];
 
 // GET reguest
@@ -21,7 +20,7 @@ const getToDos = getDataAPI().then(output => console.log("I have the data: ", ou
 const addTasks = async () => {
     fetch(apiUrl, {
     method: "POST",
-    body: JSON.stringify({description: newTodo.innerHTML, done: false}),
+    body: JSON.stringify({description: todoInput.innerHTML, done: false}),
     headers: {
         'Content-Type': 'application/json' 
     }
