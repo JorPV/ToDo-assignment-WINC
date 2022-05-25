@@ -49,23 +49,24 @@ h1 {
     list-style: none;
     width: 67vh;
 }
+
 .todo-div {
     border:solid 1px lightgray;
     font-size: 1.5rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center ;
+    justify-content:space-between;
+    align-items:center;
     transition: all 0.6s ease;
 }
 
 .todo-item {
     font-family: 'Montserrat', sans-serif;
     padding: 1.5vh;
-    display: inline;
+    /* display: inline; */
+    margin-left: 1vh;
 }
 
 .trash-bin {
-    margin-left: 30vh;
     margin-right: 5vh;
     background-color: white;
     width: 4.2vh;
