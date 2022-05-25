@@ -1,5 +1,5 @@
 const apiUrl = "http://localhost:3000/";
-const toDosData = [];
+const toDosIds = [];
 
 // GET reguest
 const getDataAPI = async () => {
@@ -38,8 +38,7 @@ const deleteTask = () => {
         console.log("Error: " + error);
       });
   };
-  
-//   deleteTask();
+
 
 // GET ID'S
 // Get the ID with the .then() method
@@ -51,7 +50,7 @@ const getTodosId = () => {
     .then((todos) =>
       todos.forEach((todo) => {
         const todoID = todo._id;
-        toDosData.push(todoID);
+        toDosIds.push(todoID);
         console.log("ID :" + todoID);
         return todoID;
       })
@@ -59,17 +58,32 @@ const getTodosId = () => {
     .catch((error) => {
       console.log("Error: " + error);
     });
-    deleteTask()
 };
 
 getTodosId();
+
+
+// console.log(toDosIds);
+
+// const todoDescription = [];
+// const getDescription = document.getElementsByTagName("li")
+
+// for (let i = 0; i < toDoList.lengh; i++) {
+//    todoDescription.push(parseInt(toDoList[i].innerHTML))
+// };
+
+// console.log(todoDescription)
+
+// for (let i = 0; i < getDescription.lengh; i++) {
+//   console.log(getDescription[i])
+// };
 
 // POST request
 // Add task to the API
 const addTasks = async () => {
   fetch(apiUrl, {
     method: "POST",
-    body: JSON.stringify({ description: todoInput.innerHTML, done: false }),
+    body: JSON.stringify({ description:newTodo.innerHTML, done: false }),
     headers: {
       "Content-Type": "application/json",
     },

@@ -2,6 +2,7 @@
 const todoInput = document.querySelector(".todo-input");
 const addButton = document.querySelector(".add-button");
 const toDoList = document.querySelector(".todo-list");
+const newTodo = document.createElement("li");
 
 // Retrieve data from API to DOM
 // async()...await()
@@ -31,7 +32,7 @@ const displayData = async () => {
       // trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
       todoDiv.appendChild(trashIcon);
       toDoList.appendChild(todoDiv);
-      console.log("Got the data: ", todo);
+      // console.log("Got the data: ", todo);
       return toDoList;
     });
   } catch (error) {
@@ -54,8 +55,8 @@ const addTodo = () => {
   checkBox.classList.add("checkbox");
   todoDiv.appendChild(checkBox);
   // li value
-  const newTodo = document.createElement("li");
-  (newTodo.innerHTML = todoInput.value), //addTasks(), displayData();
+  // const newTodo = document.createElement("li");
+  (newTodo.innerHTML = todoInput.value), addTasks();
     newTodo.classList.add("todo-item");
   // // Display API Data
   // displayData();
@@ -72,6 +73,7 @@ const addTodo = () => {
   // clear toDo input value every time
   todoInput.value = " ";
 };
+
 
 // Delete from DOM
 const deleteTodo = (e) => {
