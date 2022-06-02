@@ -4,79 +4,40 @@ const addButton = document.querySelector(".add-button");
 const toDoList = document.querySelector(".todo-list");
 const newTodo = document.createElement("li");
 
-// Retrieve data from API to DOM
-// async()...await()
-const displayData = async () => {
-  try {
-    const response = await fetch("http://localhost:3000", {
-      headers: { "Content-Type": "application/json" },
-    });
-    const data = await response.json();
-    data.map((todo) => {
-      const todoDiv = document.createElement("div");
-      todoDiv.classList.add("todo-div");
-      const checkBox = document.createElement("input");
-      checkBox.type = "checkbox";
-      checkBox.name = "task-crossed";
-      checkBox.id = "task-crossed";
-      checkBox.value = "task";
-      checkBox.classList.add("checkbox");
-      todoDiv.appendChild(checkBox);
-      const li = document.createElement("li");
-      li.classList.add("todo-item");
-      li.textContent = todo.description;
-      todoDiv.appendChild(li);
-      const trashIcon = document.createElement("img");
-      trashIcon.classList.add("trash-bin");
-      trashIcon.src = "img/red-trash.png";
-      // trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
-      todoDiv.appendChild(trashIcon);
-      toDoList.appendChild(todoDiv);
-      // console.log("Got the data: ", todo);
-      return toDoList;
-    });
-  } catch (error) {
-    console.log("Rejected", error);
-  }
-};
-
-displayData();
-
-const addTodo = () => {
-  // todo div
-  const todoDiv = document.createElement("div");
-  todoDiv.classList.add("todo-div");
-  // create a checkbox
-  const checkBox = document.createElement("input");
-  checkBox.type = "checkbox";
-  checkBox.name = "task-crossed";
-  checkBox.id = "task-crossed";
-  checkBox.value = "task";
-  checkBox.classList.add("checkbox");
-  todoDiv.appendChild(checkBox);
-  // li value
-  // const newTodo = document.createElement("li");
-  (newTodo.innerHTML = todoInput.value), addTasks();
-    newTodo.classList.add("todo-item");
-  // // Display API Data
-  // displayData();
-  // append <li> to the <div>
-  todoDiv.appendChild(newTodo);
-  // create trash icon
-  const trashIcon = document.createElement("img");
-  trashIcon.classList.add("trash-bin");
-  trashIcon.src = "img/red-trash.png";
-  // trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
-  todoDiv.appendChild(trashIcon);
-  // append to list
-  toDoList.appendChild(todoDiv);
-  // clear toDo input value every time
-  todoInput.value = " ";
-};
-
+// Retrieve data from API to DOM and create the list of todos
+const createListTodos = getDataAPI().then((todos) => {
+  todos.map((item) => {
+    const todoDiv = document.createElement("div");
+    todoDiv.classList.add("todo-div");
+    // create a checkbox
+    const checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.name = "task-crossed";
+    checkBox.id = "task-crossed";
+    checkBox.value = "task";
+    checkBox.classList.add("checkbox");
+    todoDiv.appendChild(checkBox);
+    // li value
+    const newTodo = document.createElement("li");
+    (newTodo.innerHTML = item.description), newTodo.classList.add("todo-item");
+    // append <li> to the <div>
+    todoDiv.appendChild(newTodo);
+    // create trash icon
+    const trashIcon = document.createElement("img");
+    trashIcon.classList.add("trash-bin");
+    trashIcon.src = "img/red-trash.png";
+    // trashIcon.addEventListener("click", deleteTodoApi);
+    todoDiv.appendChild(trashIcon);
+    // append to list
+    toDoList.appendChild(todoDiv);
+    // clear toDo input value every time
+    todoInput.value = " ";
+    return toDoList;
+  });
+});
 
 // Delete from DOM
-const deleteTodo = (e) => {
+const deleteTodoDom = (e) => {
   const item = e.target;
   // delete toDo
   if (item.classList[0] === "trash-bin") {
@@ -97,12 +58,46 @@ const checkTodo = (event) => {
   }
 };
 
+// Add a new ToDo to the list and API
+const addTodo = () => {
+  // todo div
+  const todoDiv = document.createElement("div");
+  todoDiv.classList.add("todo-div");
+  // create a checkbox
+  const checkBox = document.createElement("input");
+  checkBox.type = "checkbox";
+  checkBox.name = "task-crossed";
+  checkBox.id = "task-crossed";
+  checkBox.value = "task";
+  checkBox.classList.add("checkbox");
+  todoDiv.appendChild(checkBox);
+  // li value
+  // const newTodo = document.createElement("li");
+  (newTodo.innerHTML = todoInput.value), postTodo();
+  newTodo.classList.add("todo-item");
+  // append <li> to the <div>
+  todoDiv.appendChild(newTodo);
+  // create trash icon
+  const trashIcon = document.createElement("img");
+  trashIcon.classList.add("trash-bin");
+  trashIcon.src = "img/red-trash.png";
+  // trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
+  todoDiv.appendChild(trashIcon);
+  // append to list
+  toDoList.appendChild(todoDiv);
+  // clear toDo input value every time
+  todoInput.value = " ";
+  // return todoInput;
+};
+
+
 // Event listeners
 addButton.addEventListener("click", addTodo);
 todoInput.addEventListener("keypress", (event) => {
   if (event.keyCode === 13) {
-    addTodo();
+    addTodo;
   }
 });
-toDoList.addEventListener("click", deleteTodo);
+toDoList.addEventListener("click", deleteTodoDom);
 toDoList.addEventListener("click", checkTodo);
+// toDoList.addEventListener("click", deleteTodoApi);
