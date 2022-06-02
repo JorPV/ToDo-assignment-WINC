@@ -2,11 +2,11 @@
 const todoInput = document.querySelector(".todo-input");
 const addButton = document.querySelector(".add-button");
 const toDoList = document.querySelector(".todo-list");
-const newTodo = document.createElement("li");
+const toDosLi = document.createElement("li");
 
 // Retrieve data from API to DOM and create the list of todos
-const createListTodos = getDataAPI().then((todos) => {
-  todos.map((item) => {
+const createListTodos = getDataAPI().then((result) => {
+  result.map((item) => {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo-div");
     // create a checkbox
@@ -18,15 +18,19 @@ const createListTodos = getDataAPI().then((todos) => {
     checkBox.classList.add("checkbox");
     todoDiv.appendChild(checkBox);
     // li value
-    const newTodo = document.createElement("li");
-    (newTodo.innerHTML = item.description), newTodo.classList.add("todo-item");
+    const toDosLi = document.createElement("li");
+    (toDosLi.innerHTML = item.description), 
+    toDosLi.classList.add("todo-item");
+    toDosLi.contentEditable = "true"; 
+    // toDos.id = item._id;
     // append <li> to the <div>
-    todoDiv.appendChild(newTodo);
+    todoDiv.appendChild(toDosLi);
     // create trash icon
     const trashIcon = document.createElement("img");
-    trashIcon.classList.add("trash-bin");
+    trashIcon.classList.add("trash-bin");    
     trashIcon.src = "img/red-trash.png";
-    // trashIcon.addEventListener("click", deleteTodoApi);
+    trashIcon.id = item._id;
+    trashIcon.addEventListener("click", deleteTodoApi);
     todoDiv.appendChild(trashIcon);
     // append to list
     toDoList.appendChild(todoDiv);
@@ -73,10 +77,11 @@ const addTodo = () => {
   todoDiv.appendChild(checkBox);
   // li value
   // const newTodo = document.createElement("li");
-  (newTodo.innerHTML = todoInput.value), postTodo();
-  newTodo.classList.add("todo-item");
+  (toDosLi.innerHTML = todoInput.value), postTodo();
+  toDosLi.classList.add("todo-item");
+  // toDoList.contentEditable = "true"; 
   // append <li> to the <div>
-  todoDiv.appendChild(newTodo);
+  todoDiv.appendChild(toDosLi);
   // create trash icon
   const trashIcon = document.createElement("img");
   trashIcon.classList.add("trash-bin");
@@ -87,17 +92,31 @@ const addTodo = () => {
   toDoList.appendChild(todoDiv);
   // clear toDo input value every time
   todoInput.value = " ";
-  // return todoInput;
 };
 
 
-// Event listeners
+// EVENT LISTENERS
+// Event listener to add todos
 addButton.addEventListener("click", addTodo);
 todoInput.addEventListener("keypress", (event) => {
-  if (event.keyCode === 13) {
+  if ((event.keyCode || event.which) == 13) {
     addTodo;
   }
 });
+
+// Event listener to delete todos from the DOM
 toDoList.addEventListener("click", deleteTodoDom);
+
+// Event listener to crosscheck todos
 toDoList.addEventListener("click", checkTodo);
 // toDoList.addEventListener("click", deleteTodoApi);
+
+// Event listener to update Todos
+toDosLi.addEventListener("Keypress", (e) => {
+  if(e.keycode === 13) {
+  console.log(e.target)}
+  // if (e.target.description === toDosLi.textContent) {
+  //   if ((e.keyCode || e.which) == 13) {
+  //  console.log(`EVENT UPDATED`); }
+  //   }
+});

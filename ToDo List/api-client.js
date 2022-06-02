@@ -1,6 +1,6 @@
 const apiUrl = "http://localhost:3000/";
 const toDosIds = [];
-const toDosInfo = []; 
+const toDosInfo = [];
 
 // GET request
 const getDataAPI = async () => {
@@ -18,30 +18,87 @@ const getDataAPI = async () => {
 // once getDataApi is fullfilled or rejected, we log it with the .then() method
 const getToDos = getDataAPI().then((output) => {
   console.log("API data: ", output);
-  return output
-  });
- 
+  return output;
+});
+
+// POST request
+// Add task to the API
+const postTodo = async () => {
+  try {
+    await fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify({ description: toDosLi.innerHTML, done: false }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log("Error POST :" + error);
+  }
+};
+
+// DELETE request
+const deleteTodoApi = async (event) => {
+  const id = event.target.id;
+  try {
+    const response = await fetch(`${apiUrl}${id}`, {
+      method: "DELETE",
+    });
+    console.log(`ToDo succesfully deleted`);
+  } catch (error) {
+    console.log(`Error DELETE: ${error}`);
+  }
+};
+
+// toDoList.addEventListener("click", deleteTodoApi);
+// deleteTodoApi();
+
+// PUT request
+const updateTodo = async (event) => {
+  const id = event.target.id;
+  const description = event.target.description;
+  try {
+    const response = await fetch(`${apiUrl}${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(`UPDATE error ${error}`);
+  }
+};
+
+// Check if Todo is already in API
+// const addTodoItem = async (description) => {
+//     const allTodos = document.querySelector(".todo-list")
+//     if(allTodos.find((todo) => todo.description === description)) {
+//         console.log("It already exists!")
+//         return
+//     }
+//     const todo = { description: description, done: false };
+//     ... // TODO add todo to database
+//   };
 
 // GET THE DESCRIPTION
-  const getTodosDescription = () => {
-    fetch(apiUrl, {
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((todos) =>
-        todos.forEach((todo) => {
-          const todoInfo = todo.description;
-          console.log(`Description: ${todoInfo}`);
-          return todoInfo;
-        })
-      )
-      .catch((error) => {
-        console.log("Error: " + error);
-      });
-  };
+const getTodosDescription = () => {
+  fetch(apiUrl, {
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((response) => response.json())
+    .then((todos) =>
+      todos.forEach((todo) => {
+        const todoInfo = todo.description;
+        console.log(`Description: ${todoInfo}`);
+        return todoInfo;
+      })
+    )
+    .catch((error) => {
+      console.log("Error: " + error);
+    });
+};
 
-  getTodosDescription(); 
-
+// getTodosDescription();
 
 // GET ID'S
 // Get the ID with the .then() method
@@ -62,54 +119,4 @@ const getTodosId = () => {
     });
 };
 
-getTodosId();
-
-// POST request
-// Add task to the API
-const postTodo = async () => {
-  fetch(apiUrl, {
-    method: "POST",
-    body: JSON.stringify({ description: newTodo.innerHTML, done: false }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
-
-
-// DELETE request
-const deleteTodoApi = () => {
-    fetch(apiUrl, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((todos) =>
-        todos.forEach((todo) => {
-          const todoID = todo._id;
-          console.log("ID :" + todoID);
-          const urlWithID = apiUrl + todoID;
-          console.log(urlWithID);
-          return urlWithID;
-        })
-      )
-      .catch((error) => {
-        console.log("Error: " + error);
-      });
-  };
-
-// toDoList.addEventListener("click", deleteTodoApi);
-// deleteTodoApi();
-
-
-
-
-// Check if Todo is already in API
-// const addTodoItem = async (description) => {
-//     const allTodos = document.querySelector(".todo-list")
-//     if(allTodos.find((todo) => todo.description === description)) {
-//         console.log("It already exists!")
-//         return
-//     }
-//     const todo = { description: description, done: false };
-//     ... // TODO add todo to database
-//   };
+// getTodosId();
