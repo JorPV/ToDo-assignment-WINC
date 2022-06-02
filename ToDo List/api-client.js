@@ -16,10 +16,10 @@ const getDataAPI = async () => {
   }
 };
 // once getDataApi is fullfilled or rejected, we log it with the .then() method
-const getToDos = getDataAPI().then((output) => {
-  console.log("API data: ", output);
-  return output;
-});
+// const getToDos = getDataAPI().then((output) => {
+//   console.log("API data: ", output);
+//   return output;
+// });
 
 // POST request
 // Add task to the API
@@ -54,7 +54,7 @@ const deleteTodoApi = async (event) => {
 // deleteTodoApi();
 
 // PUT request
-const updateTodo = async (event) => {
+const updateTodoApi = async (event) => {
   const id = event.target.id;
   const description = event.target.description;
   try {

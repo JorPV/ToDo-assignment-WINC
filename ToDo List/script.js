@@ -6,6 +6,7 @@ const toDosLi = document.createElement("li");
 
 // Retrieve data from API to DOM and create the list of todos
 const createListTodos = getDataAPI().then((result) => {
+  console.log("API data: ", result);
   result.map((item) => {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo-div");
@@ -120,3 +121,8 @@ toDosLi.addEventListener("Keypress", (e) => {
   //  console.log(`EVENT UPDATED`); }
   //   }
 });
+
+
+const updateTodoDOM = () => {
+
+}
