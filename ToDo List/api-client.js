@@ -50,24 +50,35 @@ const deleteTodoApi = async (event) => {
   }
 };
 
-// toDoList.addEventListener("click", deleteTodoApi);
-// deleteTodoApi();
-
 // PUT request
+// const updateObject = {
+//   "description": toDosLi.innerHTML,
+//   "done": false
+// }
+
+// PUT request function
 const updateTodoApi = async (event) => {
   const id = event.target.id;
-  const description = event.target.description;
+  const updateObject = {
+    description: event.target.description,
+    done: false,
+  };
   try {
     const response = await fetch(`${apiUrl}${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(updateObject),
     });
+    const objectData = await response.json();
+    console.log(objectData);
   } catch (error) {
     console.log(`UPDATE error ${error}`);
   }
 };
+
+// updateTodoApi();
 
 // Check if Todo is already in API
 // const addTodoItem = async (description) => {

@@ -22,13 +22,13 @@ const createListTodos = getDataAPI().then((result) => {
     const toDosLi = document.createElement("li");
     (toDosLi.innerHTML = item.description), 
     toDosLi.classList.add("todo-item");
-    toDosLi.contentEditable = "true"; 
-    // toDos.id = item._id;
+    toDosLi.contentEditable = "true";
     // append <li> to the <div>
     todoDiv.appendChild(toDosLi);
     // create trash icon
     const trashIcon = document.createElement("img");
-    trashIcon.classList.add("trash-bin");    
+    // trashIcon.innerHTML= '<i class="fa-regular fa-trash-can"></i>';
+    trashIcon.classList.add("trash-bin");
     trashIcon.src = "img/red-trash.png";
     trashIcon.id = item._id;
     trashIcon.addEventListener("click", deleteTodoApi);
@@ -64,7 +64,7 @@ const checkTodo = (event) => {
 };
 
 // Add a new ToDo to the list and API
-const addTodo = () => {
+const addTodo = (todo) => {
   // todo div
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo-div");
@@ -77,24 +77,29 @@ const addTodo = () => {
   checkBox.classList.add("checkbox");
   todoDiv.appendChild(checkBox);
   // li value
-  // const newTodo = document.createElement("li");
+  const newTodo = document.createElement("li");
   (toDosLi.innerHTML = todoInput.value), postTodo();
   toDosLi.classList.add("todo-item");
-  // toDoList.contentEditable = "true"; 
+  toDosLi.id = todo._id;
+  toDosLi.description = todo.description;
+  toDosLi.addEventListener("Keypress", (e) => {
+    if (e.keycode === 13) {
+      console.log(e.target);
+    }
+  });
   // append <li> to the <div>
   todoDiv.appendChild(toDosLi);
   // create trash icon
   const trashIcon = document.createElement("img");
   trashIcon.classList.add("trash-bin");
   trashIcon.src = "img/red-trash.png";
-  // trashIcon.innerHTML= '<i class="fa-light fa-trash-can"></i>'
+  // trashIcon.innerHTML= '<i class="fa-regular fa-trash-can"></i>'
   todoDiv.appendChild(trashIcon);
   // append to list
   toDoList.appendChild(todoDiv);
   // clear toDo input value every time
   todoInput.value = " ";
 };
-
 
 // EVENT LISTENERS
 // Event listener to add todos
@@ -112,17 +117,30 @@ toDoList.addEventListener("click", deleteTodoDom);
 toDoList.addEventListener("click", checkTodo);
 // toDoList.addEventListener("click", deleteTodoApi);
 
+const liList = document.querySelectorAll("li");
+// console.log(liList);
+
+// liList.forEach(function (liItem) {
+//   liItem.addEventListener("Keypress", (e) => {
+//     if ((e.keycode || e.which) == 13) {
+//       console.log(e.target);
+//     }
+//   });
+// });
+
 // Event listener to update Todos
-toDosLi.addEventListener("Keypress", (e) => {
-  if(e.keycode === 13) {
-  console.log(e.target)}
-  // if (e.target.description === toDosLi.textContent) {
-  //   if ((e.keyCode || e.which) == 13) {
-  //  console.log(`EVENT UPDATED`); }
-  //   }
-});
+// todoInput.addEventListener("Keypress", (e) => {
+//   if ((e.keycode || e.which) == 13) {
+//     console.log(liItem);
+//   }
+//   if (e.target.description === toDosLi.textContent) {
+//     if ((e.keyCode || e.which) == 13) {
+//       console.log(`EVENT UPDATED`);
+//       updateTodoApi;
+//     }
+//   }
+// });
+
+// const updateTodoDOM = () => {
 
 
-const updateTodoDOM = () => {
-
-}
