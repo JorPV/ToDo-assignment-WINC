@@ -13,16 +13,36 @@ const createListTodos = getDataAPI().then((result) => {
     // create a checkbox
     const checkBox = document.createElement("input");
     checkBox.type = "checkbox";
-    checkBox.name = "task-crossed";
-    checkBox.id = "task-crossed";
-    checkBox.value = "task";
+    checkBox.name = "task-checkbox";
+    checkBox.value ="task-crossed"
     checkBox.classList.add("checkbox");
+    checkBox.addEventListener("click", () => { 
+    if (checkBox.checked){
+    console.log("To-Do completed");
+    item.done = true;
+    console.log(item)
+  } else {
+    item.done = false; 
+  }});
     todoDiv.appendChild(checkBox);
     // li value
-    const toDosLi = document.createElement("li");
-    (toDosLi.innerHTML = item.description), 
-    toDosLi.classList.add("todo-item");
-    toDosLi.contentEditable = "true";
+    const toDosLi = document.createElement("li"); 
+    (toDosLi.innerHTML = item.description),
+    toDosLi.className = "todo-item";
+    toDosLi.id = item._id; 
+    toDosLi.contentEditable = "true"; 
+    toDosLi.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const toDoText = e.target.innerHTML;
+        e.id = item._id;
+        e.description = e.target.innerHTML; 
+        console.log(`Updated to-do: ${toDoText}`);
+        // updateTodoApi(toDosLi);
+        e.preventDefault();
+      }
+      updateTodoApi(toDosLi);
+    });
+    
     // append <li> to the <div>
     todoDiv.appendChild(toDosLi);
     // create trash icon
@@ -35,8 +55,8 @@ const createListTodos = getDataAPI().then((result) => {
     todoDiv.appendChild(trashIcon);
     // append to list
     toDoList.appendChild(todoDiv);
-    // clear toDo input value every time
-    todoInput.value = " ";
+  // clear toDo input value every time
+    todoInput.ariaPlaceholder = "Add a task to-do ";
     return toDoList;
   });
 });
@@ -64,41 +84,41 @@ const checkTodo = (event) => {
 };
 
 // Add a new ToDo to the list and API
-const addTodo = (todo) => {
+const addTodo = () => {
   // todo div
-  const todoDiv = document.createElement("div");
-  todoDiv.classList.add("todo-div");
-  // create a checkbox
-  const checkBox = document.createElement("input");
-  checkBox.type = "checkbox";
-  checkBox.name = "task-crossed";
-  checkBox.id = "task-crossed";
-  checkBox.value = "task";
-  checkBox.classList.add("checkbox");
-  todoDiv.appendChild(checkBox);
+  // const todoDiv = document.createElement("div");
+  // todoDiv.classList.add("todo-div");
+  // // create a checkbox
+  // const checkBox = document.createElement("input");
+  // checkBox.type = "checkbox";
+  // checkBox.name = "task-crossed";
+  // checkBox.id = "task-crossed";
+  // checkBox.value = "task";
+  // checkBox.classList.add("checkbox");
+  // todoDiv.appendChild(checkBox);
   // li value
-  const newTodo = document.createElement("li");
+  // const newTodo = document.createElement("li");
   (toDosLi.innerHTML = todoInput.value), postTodo();
   toDosLi.classList.add("todo-item");
-  toDosLi.id = todo._id;
-  toDosLi.description = todo.description;
-  toDosLi.addEventListener("Keypress", (e) => {
-    if (e.keycode === 13) {
-      console.log(e.target);
-    }
-  });
-  // append <li> to the <div>
-  todoDiv.appendChild(toDosLi);
-  // create trash icon
-  const trashIcon = document.createElement("img");
-  trashIcon.classList.add("trash-bin");
-  trashIcon.src = "img/red-trash.png";
-  // trashIcon.innerHTML= '<i class="fa-regular fa-trash-can"></i>'
-  todoDiv.appendChild(trashIcon);
-  // append to list
-  toDoList.appendChild(todoDiv);
+  // toDosLi.id = todo._id;
+  // toDosLi.description = todo.description;
+  // toDosLi.addEventListener("Keypress", (e) => {
+  //   if (e.keycode === 13) {
+  //     console.log(e.target);
+  //   }
+  // });
+  // // append <li> to the <div>
+  // todoDiv.appendChild(toDosLi);
+  // // create trash icon
+  // const trashIcon = document.createElement("img");
+  // trashIcon.classList.add("trash-bin");
+  // trashIcon.src = "img/red-trash.png";
+  // // trashIcon.innerHTML= '<i class="fa-regular fa-trash-can"></i>'
+  // todoDiv.appendChild(trashIcon);
+  // // append to list
+  // toDoList.appendChild(todoDiv);
   // clear toDo input value every time
-  todoInput.value = " ";
+  // todoInput.value = " ";
 };
 
 // EVENT LISTENERS
@@ -120,13 +140,13 @@ toDoList.addEventListener("click", checkTodo);
 const liList = document.querySelectorAll("li");
 // console.log(liList);
 
-// liList.forEach(function (liItem) {
-//   liItem.addEventListener("Keypress", (e) => {
-//     if ((e.keycode || e.which) == 13) {
-//       console.log(e.target);
-//     }
-//   });
-// });
+liList.forEach(function (liItem) {
+  liItem.addEventListener("Keypress", (e) => {
+    if ((e.keycode || e.which) == 13) {
+      console.log(e);
+    }
+  });
+});
 
 // Event listener to update Todos
 // todoInput.addEventListener("Keypress", (e) => {

@@ -50,17 +50,13 @@ const deleteTodoApi = async (event) => {
   }
 };
 
-// PUT request
-// const updateObject = {
-//   "description": toDosLi.innerHTML,
-//   "done": false
-// }
 
+// PUT request
 // PUT request function
 const updateTodoApi = async (event) => {
   const id = event.target.id;
   const updateObject = {
-    description: event.target.description,
+    description: event.target.innerHTML,
     done: false,
   };
   try {
