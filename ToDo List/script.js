@@ -1,8 +1,8 @@
 // Selectors
 const todoInput = document.querySelector(".todo-input");
 const addButton = document.querySelector(".add-button");
-const toDoList = document.querySelector(".todo-list");
-const toDosLi = document.createElement("li");
+const toDoUl = document.querySelector(".todo-list");
+const toDoLi = document.createElement("li");
 
 // Retrieve data from API to DOM and create the list of todos
 const createListTodos = getDataAPI().then((result) => {
@@ -16,6 +16,7 @@ const createListTodos = getDataAPI().then((result) => {
     checkBox.name = "task-checkbox";
     checkBox.value ="task-crossed"
     checkBox.classList.add("checkbox");
+    //change the status of the to-do
     checkBox.addEventListener("click", () => { 
     if (checkBox.checked){
     console.log("To-Do completed");
@@ -26,38 +27,39 @@ const createListTodos = getDataAPI().then((result) => {
   }});
     todoDiv.appendChild(checkBox);
     // li value
-    const toDosLi = document.createElement("li"); 
-    (toDosLi.innerHTML = item.description),
-    toDosLi.className = "todo-item";
-    toDosLi.id = item._id; 
-    toDosLi.contentEditable = "true"; 
-    toDosLi.addEventListener("keypress", (e) => {
+    const toDoLi = document.createElement("li"); 
+    (toDoLi.innerHTML = item.description),
+    toDoLi.className = "todo-item";
+    toDoLi.id = item._id; 
+    toDoLi.description = item.description;
+    toDoLi.contentEditable = "true"; 
+    // update to-do 
+    toDoLi.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
-        const toDoText = e.target.innerHTML;
-        e.id = item._id;
-        e.description = e.target.innerHTML; 
-        console.log(`Updated to-do: ${toDoText}`);
-        // updateTodoApi(toDosLi);
+        let oldText = e.target.description;
+        let newText = e.target.innerHTML
+        console.log(`Updated to-do: '${oldText}' to '${newText}'`);
+        console.log(e.target.id) 
+        updateTodoApi(toDoLi);
         e.preventDefault();
       }
-      updateTodoApi(toDosLi);
     });
-    
     // append <li> to the <div>
-    todoDiv.appendChild(toDosLi);
+    todoDiv.appendChild(toDoLi);
     // create trash icon
     const trashIcon = document.createElement("img");
     // trashIcon.innerHTML= '<i class="fa-regular fa-trash-can"></i>';
     trashIcon.classList.add("trash-bin");
     trashIcon.src = "img/red-trash.png";
     trashIcon.id = item._id;
+    // Delete task 
     trashIcon.addEventListener("click", deleteTodoApi);
     todoDiv.appendChild(trashIcon);
     // append to list
-    toDoList.appendChild(todoDiv);
+    toDoUl.appendChild(todoDiv);
   // clear toDo input value every time
     todoInput.ariaPlaceholder = "Add a task to-do ";
-    return toDoList;
+    return toDoUl;
   });
 });
 
@@ -83,42 +85,10 @@ const checkTodo = (event) => {
   }
 };
 
-// Add a new ToDo to the list and API
+// Add a new ToDo to the API
 const addTodo = () => {
-  // todo div
-  // const todoDiv = document.createElement("div");
-  // todoDiv.classList.add("todo-div");
-  // // create a checkbox
-  // const checkBox = document.createElement("input");
-  // checkBox.type = "checkbox";
-  // checkBox.name = "task-crossed";
-  // checkBox.id = "task-crossed";
-  // checkBox.value = "task";
-  // checkBox.classList.add("checkbox");
-  // todoDiv.appendChild(checkBox);
-  // li value
-  // const newTodo = document.createElement("li");
-  (toDosLi.innerHTML = todoInput.value), postTodo();
-  toDosLi.classList.add("todo-item");
-  // toDosLi.id = todo._id;
-  // toDosLi.description = todo.description;
-  // toDosLi.addEventListener("Keypress", (e) => {
-  //   if (e.keycode === 13) {
-  //     console.log(e.target);
-  //   }
-  // });
-  // // append <li> to the <div>
-  // todoDiv.appendChild(toDosLi);
-  // // create trash icon
-  // const trashIcon = document.createElement("img");
-  // trashIcon.classList.add("trash-bin");
-  // trashIcon.src = "img/red-trash.png";
-  // // trashIcon.innerHTML= '<i class="fa-regular fa-trash-can"></i>'
-  // todoDiv.appendChild(trashIcon);
-  // // append to list
-  // toDoList.appendChild(todoDiv);
-  // clear toDo input value every time
-  // todoInput.value = " ";
+  (toDoLi.innerHTML = todoInput.value), postTodo();
+  toDoLi.classList.add("todo-item");
 };
 
 // EVENT LISTENERS
@@ -131,36 +101,11 @@ todoInput.addEventListener("keypress", (event) => {
 });
 
 // Event listener to delete todos from the DOM
-toDoList.addEventListener("click", deleteTodoDom);
+toDoUl.addEventListener("click", deleteTodoDom);
 
 // Event listener to crosscheck todos
-toDoList.addEventListener("click", checkTodo);
+toDoUl.addEventListener("click", checkTodo);
 // toDoList.addEventListener("click", deleteTodoApi);
 
-const liList = document.querySelectorAll("li");
-// console.log(liList);
-
-liList.forEach(function (liItem) {
-  liItem.addEventListener("Keypress", (e) => {
-    if ((e.keycode || e.which) == 13) {
-      console.log(e);
-    }
-  });
-});
-
-// Event listener to update Todos
-// todoInput.addEventListener("Keypress", (e) => {
-//   if ((e.keycode || e.which) == 13) {
-//     console.log(liItem);
-//   }
-//   if (e.target.description === toDosLi.textContent) {
-//     if ((e.keyCode || e.which) == 13) {
-//       console.log(`EVENT UPDATED`);
-//       updateTodoApi;
-//     }
-//   }
-// });
-
-// const updateTodoDOM = () => {
 
 

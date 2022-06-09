@@ -14,45 +14,45 @@ body {
 h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 10vh;
+    text-align: center;
     color: goldenrod;
     margin-bottom: 5vh;
 }
 
 .todo-input {
-    height: 5.5vh;
-    width: 50vh;
+    height: 9vh;
+    width: 95vh;
     margin-right: 4vh;
     font-family: 'Montserrat', sans-serif;
-    font-size: 3vh;
-    border: solid 1px;
-    padding-left: 2vh;
+    font-size: 1.5rem;    
+    border: solid 1px black;
+    padding-left: 5vh;
 }
 
 .add-button {
     background-color: blueviolet;
     color: whitesmoke;
-    height: 5.5vh;
-    width: 12vh;
+    height: 9vh;
+    width: 20vh;
     border: none;
     border-radius: 10px;
-    font-size: 3.5vh;
+    font-size: 1.7rem;
 }
 
 .list-elements {
     margin-top: 8vh;
     display: flex;
     justify-content: flex-start;
-    font-size: 3vh;
+    font-size: 1.5rem;
 }
 
 .todo-list {
     list-style: none;
-    width: 67vh;
+    width: 120vh;
 }
 
 .todo-div {
     border:solid 1px lightgray;
-    font-size: 1.5rem;
     display: flex;
     justify-content:space-between;
     align-items:center;
@@ -62,15 +62,17 @@ h1 {
 .todo-item {
     font-family: 'Montserrat', sans-serif;
     padding: 1.5vh;
-    /* display: inline; */
     margin-left: 1vh;
+    width: 80vh;
+    text-align: center;
 }
+
 
 .trash-bin {
     margin-right: 5vh;
     background-color: white;
-    width: 4.2vh;
-    height: 4.2vh;
+    width: 4.7vh;
+    height: 4.7vh;
     color: red;
     border: none;
     cursor: pointer;
@@ -79,7 +81,7 @@ h1 {
 
 
 .checkbox {
-    margin-left: 5vh;
+    margin-left: 8vh;
 }
 
 .completed {
@@ -90,3 +92,4 @@ h1 {
     opacity: 0;
     transform: translateY(10rem) rotateZ(45deg);
 }
+
