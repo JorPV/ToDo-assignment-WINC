@@ -47,9 +47,8 @@ const deleteTodoApi = async (event) => {
 // PUT request
 // PUT request function
 const updateTodoApi = async (todo) => {
-  const id = todo.target.id; //it doesn't read the properties
-  const oldText = todo.target.description;
-  const newText = todo.target.innerHTML
+  const id = todo.id; 
+  const newText = todo.innerHTML
   const updateObject = {
     description: newText,
     done: false,
@@ -64,7 +63,7 @@ const updateTodoApi = async (todo) => {
       body: JSON.stringify(updateObject),
     });
     const objectData = await response.json();
-    console.log(objectData);
+    console.log(`${objectData.description}, has been succesfully updated`)
   } catch (error) {
     console.log(`UPDATE error ${error}`);
   }

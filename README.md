@@ -1,7 +1,4 @@
-# ToDo list assignment
- - fetch the API from 'http://localhost:3000/'
+# First draft of the ToDo List assignment
+I can add tasks to the DOM and they also add to the API 'http://localhost:3000/' with the POST request. 
 
-1. Add tasks by writing into the input bar and press the 'Add' button or hit the 'Enter' key to add it to the list. 
-2. 'Check' the checkbox to change the status of the task and cross-line it. 
-3. Click on the trash icon to delete the task.
-4. Click on top of a task from the list to change it, and press the 'Enter' key to update it.  
+The DELETE request is not working yet. 

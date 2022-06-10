@@ -14,32 +14,31 @@ const createListTodos = getDataAPI().then((result) => {
     const checkBox = document.createElement("input");
     checkBox.type = "checkbox";
     checkBox.name = "task-checkbox";
-    checkBox.value ="task-crossed"
+    checkBox.value = "task-crossed";
     checkBox.classList.add("checkbox");
     //change the status of the to-do
-    checkBox.addEventListener("click", () => { 
-    if (checkBox.checked){
-    console.log("To-Do completed");
-    item.done = true;
-    console.log(item)
-  } else {
-    item.done = false; 
-  }});
+    checkBox.addEventListener("click", () => {
+      if (checkBox.checked) {
+        console.log("To-Do completed");
+        item.done = true;
+        console.log(item);
+      } else {
+        item.done = false;
+      }
+    });
     todoDiv.appendChild(checkBox);
     // li value
-    const toDoLi = document.createElement("li"); 
-    (toDoLi.innerHTML = item.description),
-    toDoLi.className = "todo-item";
-    toDoLi.id = item._id; 
+    const toDoLi = document.createElement("li");
+    (toDoLi.innerHTML = item.description), (toDoLi.className = "todo-item");
+    toDoLi.id = item._id;
     toDoLi.description = item.description;
-    toDoLi.contentEditable = "true"; 
-    // update to-do 
+    toDoLi.contentEditable = "true";
+    // update to-do
     toDoLi.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
         let oldText = e.target.description;
-        let newText = e.target.innerHTML
+        let newText = e.target.innerHTML;
         console.log(`Updated to-do: '${oldText}' to '${newText}'`);
-        console.log(e.target.id) 
         updateTodoApi(toDoLi);
         e.preventDefault();
       }
@@ -52,12 +51,12 @@ const createListTodos = getDataAPI().then((result) => {
     trashIcon.classList.add("trash-bin");
     trashIcon.src = "img/red-trash.png";
     trashIcon.id = item._id;
-    // Delete task 
+    // Delete task
     trashIcon.addEventListener("click", deleteTodoApi);
     todoDiv.appendChild(trashIcon);
     // append to list
     toDoUl.appendChild(todoDiv);
-  // clear toDo input value every time
+    // clear toDo input value every time
     todoInput.ariaPlaceholder = "Add a task to-do ";
     return toDoUl;
   });
@@ -106,6 +105,3 @@ toDoUl.addEventListener("click", deleteTodoDom);
 // Event listener to crosscheck todos
 toDoUl.addEventListener("click", checkTodo);
 // toDoList.addEventListener("click", deleteTodoApi);
-
-
-
