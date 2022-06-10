@@ -1,6 +1,6 @@
 # To-Do list assignment
 
- Fetch the data from the API listening at'http://localhost:3000/' 
+ Fetch the data from the API listening at 'http://localhost:3000/' 
 
 1. Write a task to-do and add it into the list by pressing the key "Enter" or clicking the button "Add".
 2. Delete a task from the list by clicking the trash icon. 
