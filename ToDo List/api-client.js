@@ -48,7 +48,7 @@ const deleteTodoApi = async (event) => {
 // PUT request function
 const updateTodoApi = async (todo) => {
   const id = todo.id; 
-  const newText = todo.innerHTML
+  const newText = todo.innerHTML;
   const updateObject = {
     description: newText,
     done: false,
